@@ -43,7 +43,7 @@ def create_test_packet(id):
     return v
 
 
-def create_basic_location_alert(id, stream, role, description,
+def create_basic_location_alert(id, role, description,
                                 ra, dec, err,
                                 event_time):
     """
@@ -58,12 +58,12 @@ def create_basic_location_alert(id, stream, role, description,
         ra (float): Right ascension (J2000 degrees)
         dec (float): Declination (J2000 degrees)
         err (float): Positional error-radius (degrees)
-        event_time (datetime.datetime): Time of event (UTC).
+        event_datetime (datetime.datetime): Time of event (UTC).
     """
-
+    stream = id[id_keys.stream]
     v = create_skeleton_voevent(id, stream, role)
     v.What.Description = description
-    vp.set_where_when(v,
+    vp.add_where_when(v,
           coords=vp.Position2D(ra=ra, dec=dec, err=err,
                                units='deg',
                                system=vp.definitions.sky_coord_system.fk5),

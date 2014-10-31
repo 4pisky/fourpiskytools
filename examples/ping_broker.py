@@ -18,7 +18,7 @@ example_identity = {
 #For testing with 4PiSky Broker:
 # host = 'voevent.4pisky.org'
 
-#For testing locally
+# For testing locally
 # (must have an instance of Comet running, see:
 # http://comet.transientskp.org/en/1.2.1/usage/broker.html#invoking-comet )
 host = 'localhost'
