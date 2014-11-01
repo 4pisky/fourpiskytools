@@ -11,16 +11,16 @@ def generate_stream_id():
 
     The idea is to create a stream ID that is largely human-readable
     (hence the timestamp), but will not repeat if multiple packets are generated
-    within a small timespan - so we append a uuid1() string.
+    within a small timespan (within reason).
+    To do this, we assume that only a single machine
+    is generating alerts in a given stream. This means we can generate
+    a uuid1() string and throw away everything except the first 32 bits,
+    which represent the low-end bytes of the timestamp.
 
-    Note this results in quite a long string. If brevity is required, we
-    could probably make do by using the first fragment of the uuid1 string,
-    since the rest is a static function of the hostname, etc. But I see
-    no compelling reason to risk UUID collisions by doing so.
     """
     datetime_format_short = '%y%m%d-%H%M.%S'
     timestamp = datetime.utcnow().strftime(datetime_format_short)
-    stream_id = timestamp+'_'+str(uuid.uuid1())
+    stream_id = timestamp+'_'+uuid.uuid1().hex[:8]
     return stream_id
 
 

@@ -25,4 +25,5 @@ host = 'localhost'
 
 
 test_packet = fourpiskytools.voevent.create_test_packet(example_identity)
+print "Sending packet, ivorn:", test_packet.attrib['ivorn']
 fourpiskytools.comet.send_voevent(test_packet, host=host)
