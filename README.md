@@ -1,13 +1,14 @@
 fourpiskytools
 ==============
 
-A handful of simple convenience functions tying together use of the
+A handful of examples tying together use of the
 [voevent-parse](http://voevent-parse.readthedocs.org/) and 
 [Comet](http://comet.transientskp.org/) 
 packages, providing a 
-quick and easy way to get started sending or receiving VOEvents with the
-[4 Pi Sky](http://4pisky.org) 
-VOEvent broker (or indeed any VOEvent node of your choice).
+quick and easy way to get started sending or receiving
+[VOEvents](http://en.wikipedia.org/wiki/VOEvent)
+with the [4 Pi Sky](http://4pisky.org)
+VOEvent broker (or any other VOEvent broker, for that matter).
 
 This package should be considered 'highly opinionated': it makes
 many assumptions about what you want to do, in order to present a
@@ -28,7 +29,6 @@ Features
 * A basic utility class for generating GTK notifications (desktop alerts
   akin to e.g. the 'new email' pop-up that Thunderbird will generate).
 
-That's it - the package is intentionally minimal.
  
 
 Installation

@@ -5,6 +5,11 @@ Processes a received VOEvent packet.
 Accept a VOEvent packet via standard input. Parse it using voeventparse,
 then decide what kind of packet it is, and what to do accordingly.
 (In this example, we just write notifications to the desktop in all cases.)
+
+Can be tested at the command line by running (for example):
+
+   cat test_packet.xml | ./process_voevent_from_stdin.py
+
 """
 
 import sys
