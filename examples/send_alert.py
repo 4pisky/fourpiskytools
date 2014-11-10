@@ -1,5 +1,6 @@
+#!/usr/bin/env python
 """
-Send an alert to a remote broker.
+Send an alert containing sky co-ordinates to a remote broker.
 """
 
 import fourpiskytools
@@ -32,7 +33,7 @@ ra,dec = 90.0,-45.0
 positional_error = 0.1 #degrees error radius
 event_datetime = datetime(year=2000,month=1,day=1,hour=0,minute=0)
 
-event_packet = create_basic_location_alert(example_identity,
+alert_packet = create_basic_location_alert(example_identity,
                                        # role = vp.definitions.roles.observation,
                                        role = vp.definitions.roles.test,
                                        description="Y2K Bug",
@@ -44,4 +45,8 @@ event_packet = create_basic_location_alert(example_identity,
 # See voevent-parse docs for detailed example of creating / modifying a packet:
 # http://voevent-parse.readthedocs.org/en/0.7.0/examples.html#author-a-new-voevent-packet
 
-fourpiskytools.comet.send_voevent(event_packet, host=host)
+# Dump a copy of the packet to the current directory for manual inspection
+with open('alert_packet.xml','w') as f:
+    vp.dump(alert_packet, f)
+
+fourpiskytools.comet.send_voevent(alert_packet, host=host)
