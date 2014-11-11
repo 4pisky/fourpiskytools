@@ -1,5 +1,6 @@
 fourpiskytools
 ==============
+![4 Pi Sky Logo](4ps_logo_small.png)
 
 A handful of examples tying together use of the
 [voevent-parse](http://voevent-parse.readthedocs.org/) and 
@@ -10,9 +11,8 @@ quick and easy way to get started sending or receiving
 with the [4 Pi Sky](http://4pisky.org)
 VOEvent broker (or any other VOEvent broker, for that matter).
 
-This package should be considered 'highly opinionated': it makes
-many assumptions about what you want to do, in order to present a
-simple interface.
+This package makes many assumptions about what you want to do,
+in order to present a simple interface.
 Those with more specific requirements should refer to this package as
 a quick example, and then use *voevent-parse* and *Comet* directly
 (see also: [pysovo](https://github.com/timstaley/pysovo)).
@@ -26,6 +26,8 @@ Features
   VOEvents with.
 * A couple of ready-made functions that take a dictionary defining the sender's 
   'identity' and provide one-liner methods for composing VOEvent packets.
+* A shell script demonstrating how to initialise Comet to receive alerts and 
+  pass them on to a Python script for processing.
 * A basic utility class for generating GTK notifications (desktop alerts
   akin to e.g. the 'new email' pop-up that Thunderbird will generate).
 
