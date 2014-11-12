@@ -81,3 +81,11 @@ Feedback
 Questions? Issues? Happy to help, either drop a note 
 [on the issue tracker](https://github.com/timstaley/fourpiskytools/issues)
 or send us an email.
+
+Acknowledgement
+---------------
+If you make use of these examples in work leading to a publication, we ask
+that you cite the underlying packages as detailed 
+[here](http://comet.transientskp.org/en/1.2.1/)
+and 
+[here](http://voevent-parse.readthedocs.org/en/master/intro.html#acknowledgement).
