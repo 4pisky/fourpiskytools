@@ -19,9 +19,8 @@ a quick example, and then use *voevent-parse* and *Comet* directly
 
 Features
 --------
-* A function provding a *subprocess* wrapper about *comet-sendvo*, to allow
-  publishing of [VOEvents](http://en.wikipedia.org/wiki/VOEvent) from a scripted
-  process.
+* A function providing a *subprocess* wrapper about *comet-sendvo*, to allow
+  publishing of VOEvents from a scripted process.
 * A simple (~3 lines) routine for generating unique identifiers to tag your
   VOEvents with.
 * A couple of ready-made functions that take a dictionary defining the sender's 
@@ -31,7 +30,12 @@ Features
 * A basic utility class for generating GTK notifications (desktop alerts
   akin to e.g. the 'new email' pop-up that Thunderbird will generate).
 
- 
+Quickstart
+----------
+(For the impatient, who are running Ubuntu/Debian and have the virtualenv tool available)
+
+    sudo apt-get install libxml2-dev libxslt-dev
+    ./INSTALL.sh && ./RUNME.sh
 
 Installation
 ------------
@@ -71,3 +75,9 @@ and verify that you can install those packages individually.
 Usage
 -----
 See the [examples](examples).
+
+Feedback
+--------
+Questions? Issues? Happy to help, either drop a note 
+[on the issue tracker](https://github.com/timstaley/fourpiskytools/issues)
+or send us an email.

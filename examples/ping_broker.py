@@ -17,12 +17,13 @@ example_identity = {
     }
 
 
-#For testing with 4PiSky Broker:
+## For testing with 4PiSky Broker:
+## (You will need to contact us first about whitelisting your IP address)
 # host = 'voevent.4pisky.org'
 
-# For testing locally
-# (must have an instance of Comet running and set to receive submissions, see:
-# http://comet.transientskp.org/en/1.2.1/usage/broker.html#invoking-comet )
+## For testing locally
+## (must have an instance of Comet running and set to receive submissions, see:
+## http://comet.transientskp.org/en/1.2.1/usage/broker.html#invoking-comet )
 host = 'localhost'
 
 
