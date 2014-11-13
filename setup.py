@@ -7,7 +7,7 @@ with open('requirements.txt') as f:
 
 setup(
     name="fourpiskytools",
-    version="0.1.1",
+    version="0.1.2",
     packages=['fourpiskytools', ],
     description="VOEvent packet generation and transmission using 'voevent-parse' and 'Comet'.",
     author="Tim Staley",

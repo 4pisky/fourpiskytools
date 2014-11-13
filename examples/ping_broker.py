@@ -8,6 +8,9 @@ import fourpiskytools
 from fourpiskytools.identity import id_keys
 import voeventparse
 
+import logging
+logging.basicConfig()
+
 example_identity = {
     id_keys.address : 'voevent.organization.tld',
     id_keys.stream : 'ProjectFooAlerts',
