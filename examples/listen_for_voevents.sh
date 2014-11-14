@@ -3,7 +3,7 @@
 # Start an instance of Comet and connect to 4PiSky broker.
 # VOEvent packets received are passed via stdin to the $HANDLER script.
 
-IVORN=$(hostname -A | tr -d ' ')/voevent-test
+IVORN=$(hostname --long | tr -d ' ')/voevent-test
 HANDLER=./process_voevent_from_stdin.py
 REMOTE=voevent.4pisky.org
 
