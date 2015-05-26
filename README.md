@@ -7,15 +7,16 @@ A handful of examples tying together use of the
 [Comet](http://comet.transientskp.org/) 
 packages, providing a 
 quick and easy way to get started sending or receiving
-[VOEvents](http://en.wikipedia.org/wiki/VOEvent)
-with the [4 Pi Sky](http://4pisky.org)
+[VOEvents](http://voevent.readthedocs.org/)
+with the [4 Pi Sky](http://4pisky.org/voevent)
 VOEvent broker (or any other VOEvent broker, for that matter).
 
 This package makes many assumptions about what you want to do,
 in order to present a simple interface.
 Those with more specific requirements should refer to this package as
 a quick example, and then use *voevent-parse* and *Comet* directly
-(see also: [pysovo](https://github.com/timstaley/pysovo)).
+(see also: the [voevent-parse tutorial](https://github.com/timstaley/voevent-parse-tutorial), 
+and [pysovo](https://github.com/timstaley/pysovo)).
 
 Features
 --------
