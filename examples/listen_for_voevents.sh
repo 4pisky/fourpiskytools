@@ -4,7 +4,7 @@
 # VOEvent packets received are passed via stdin to the $HANDLER script.
 
 IVORN=fpstoolstest/$(hostname)
-HANDLER=./process_voevent_from_stdin_2.py
+HANDLER=./process_voevent_from_stdin_1.py
 REMOTE=voevent.4pisky.org
 
 /usr/bin/env twistd -n comet \

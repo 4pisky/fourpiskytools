@@ -17,6 +17,11 @@ Can be tested at the command line by running (for example):
 import sys
 import voeventparse
 
+import logging
+logging.basicConfig(filename='script2.log',level=logging.INFO)
+logger = logging.getLogger('script2')
+logger.handlers.append(logging.StreamHandler(sys.stdout))
+
 try:
     import pgi
     PGI_INSTALLED = True
@@ -24,9 +29,6 @@ try:
 except ImportError:
     PGI_INSTALLED = False
     from fourpiskytools import SimpleNotifier as Notifier
-
-
-
 
 def main():
     stdin = sys.stdin.read()

@@ -123,12 +123,19 @@ You should see something like:
 
 > Authored by ivo://voevent.organization.tld at 2014-11-13T21:18:55
 
+The same text should also be output to a logfile, `script1.log`.
+
 The second script, [process_voevent_from_stdin_2.py](examples/process_voevent_from_stdin_2.py), contains
 some slightly more interesting logic, so you can change processing depending what sort of VOEvent packet is received.
 As an aside, note that if you're on an Ubuntu system, you can ``pip install pgi`` to get pop-up desktop notifications using the code called from script 2.
 
+### Hooking up Comet and the processing script
 The examples folder also contains a shell script that runs Comet and passes VOEvents to a handler script - see 
-[listen_for_voevents.sh](examples/listen_for_voevents.sh).
+[listen_for_voevents.sh](examples/listen_for_voevents.sh). 
+Note that you won't see the command line output from the called script - you'll 
+have to inspect the logfile to see the results from processing any 
+incoming VOEvents (and you may have to wait for a VOEvent to be broadcast
+via the broker!).
 
 ## Sending VOEvents
 A full guide is on the To Do list! For now, see [send_alert.py](examples/send_alert.py).

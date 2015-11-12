@@ -5,7 +5,7 @@ import fourpiskytools.identity
 import fourpiskytools.voevent
 #import fourpiskytools.notify
 
-
+import logging
 
 class SimpleNotifier():
     """
@@ -14,10 +14,7 @@ class SimpleNotifier():
     (Usable without any extra faff on Mac OSX, basically.)
 
     """
-
     def send_notification(self, title, text):
-        print "============================="
-        print title
-        print "-----------------------------"
-        print text
-        print "============================="
+        logger = logging.getLogger("script2")
+        logger.info(title)
+        logger.info(text)
