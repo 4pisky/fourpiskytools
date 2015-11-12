@@ -4,7 +4,9 @@ Processes a received VOEvent packet.
 
 Accept a VOEvent packet via standard input. Parse it using voeventparse,
 then decide what kind of packet it is, and what to do accordingly.
-(In this example, we just write notifications to the desktop in all cases.)
+(In this example, we just write notifications to the desktop / print to the
+command line in all cases, but you could imagine triggering different
+telescopes, emailing different people, etc.)
 
 Can be tested at the command line by running (for example):
 
@@ -15,7 +17,16 @@ Can be tested at the command line by running (for example):
 import sys
 import voeventparse
 
-from fourpiskytools.notify import Notifier
+try:
+    import pgi
+    PGI_INSTALLED = True
+    from fourpiskytools.notify import Notifier
+except ImportError:
+    PGI_INSTALLED = False
+    from fourpiskytools import SimpleNotifier as Notifier
+
+
+
 
 def main():
     stdin = sys.stdin.read()
@@ -51,22 +62,23 @@ def is_ping_packet(v):
 def handle_grb(v):
     ivorn = v.attrib['ivorn']
     coords = voeventparse.pull_astro_coords(v)
+    text = "Swift packet received, coords are {}".format(coords)
     n = Notifier()
     n.send_notification(title="NEW SWIFT GRB!",
-                        text=str(coords))
+                        text=text)
     handle_other(v)
 
 def handle_ping_packet(v):
     n = Notifier()
-    n.send_notification(title="Ping",
-                        text="Pong!")
+    n.send_notification(title="Ping!",
+                        text="Packet received matches 'ping packet' filter.")
     handle_other(v)
 
 def handle_other(v):
     ivorn = v.attrib['ivorn']
     n = Notifier()
     n.send_notification(title="VOEvent received",
-                        text=ivorn)
+                        text="IVORN: "+ivorn)
 
 if __name__ == '__main__':
     sys.exit(main())
