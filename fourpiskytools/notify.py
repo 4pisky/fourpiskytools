@@ -23,6 +23,7 @@ try:
 
 except ImportError:
     try:
+        from AppKit import NSImage
         from Foundation import NSBundle
         from objc import lookUpClass
 
@@ -41,10 +42,22 @@ except ImportError:
                 NCenter = lookUpClass("NSUserNotificationCenter")
                 self.center = NCenter.defaultUserNotificationCenter()
 
-            def send_notification(self, title, text, icon="ignored"):
+            def send_notification(self, title, text, icon=None):
+                """
+                Display an on-screen notification.
+
+                Args:
+                    title (str): Title of notification.
+                    text (str): Body text for notification.
+                    icon (str): Path for optional image
+                                accompanying notification.
+                """
                 n = self.NSUserNotification.alloc().init()
                 n.setTitle_(title)
                 n.setInformativeText_(text)
+
+                # This degrades gracefully if icon doesn't exist or is unreadable.
+                n.setContentImage_(NSImage.alloc().initWithContentsOfFile_(icon))
                 self.center.scheduleNotification_(n)
 
     except ImportError:
@@ -54,7 +67,15 @@ except ImportError:
             """
             Writes a message to the log.
             """
-            def send_notification(self, title, text):
+            def send_notification(self, title, text, icon=None):
+                """
+                Write a message to the 'notifier' log.
+
+                Args:
+                    title (str): Title of notification.
+                    text (str): Body text for notification.
+                    icon (str): Ignored; included for API compatibility only.
+                """
                 logger = logging.getLogger("notifier")
                 logger.info(title)
                 logger.info(text)
