@@ -19,16 +19,10 @@ import voeventparse
 
 import logging
 logging.basicConfig(filename='script2.log',level=logging.INFO)
-logger = logging.getLogger('script2')
+logger = logging.getLogger('notifier')
 logger.handlers.append(logging.StreamHandler(sys.stdout))
 
-try:
-    import pgi
-    PGI_INSTALLED = True
-    from fourpiskytools.notify import Notifier
-except ImportError:
-    PGI_INSTALLED = False
-    from fourpiskytools import SimpleNotifier as Notifier
+from fourpiskytools.notify import Notifier
 
 def main():
     stdin = sys.stdin.read()

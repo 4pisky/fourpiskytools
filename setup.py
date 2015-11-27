@@ -8,10 +8,10 @@ install_requires = [
 ]
 
 
-## Optional: allows nice 'desktop notifications' on Ubuntu-like systems
-## BUT: Requires GOBject, probably more trouble than it's worth on e.g. Mac OSX.
+## Optional: allows nice 'desktop notifications' on Ubuntu-like systems (pgi) or OSX (objc).
 extras_require = {
     'pgi': ['pgi'],
+    'objc': ['objc'],
 }
 
 setup(
