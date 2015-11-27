@@ -73,7 +73,7 @@ Then, ``cd fourpiskytools`` and
 
 Or if you prefer the traditional method:
 
-    python install setup.py
+    python setup.py install 
 
 If you run into problems, try consulting the installation guides for
 [voevent-parse](http://voevent-parse.readthedocs.org/en/master/intro.html#installation)
