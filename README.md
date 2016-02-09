@@ -50,11 +50,15 @@ by running:
 
     apt-get install libxml2-dev libxslt-dev
 
-before you attempt to install anything else. For more information
-(e.g. for Mac OSX), see the relevant 
+before you attempt to install anything else.
+Mac OSX users might try:
+
+    STATIC_DEPS=true pip install lxml
+
+(See the relevant
 [Notes on VOEvent section](http://voevent.readthedocs.org/en/latest/setup.html#background-and-dependencies) 
 or consult the 
-[LXML docs](http://lxml.de/installation.html#installation).
+[LXML docs](http://lxml.de/installation.html#installation) for more detail).
 
 You can check if LXML is already installed by simply trying 
 
@@ -136,6 +140,24 @@ Note that you won't see the command line output from the called script - you'll
 have to inspect the logfile to see the results from processing any 
 incoming VOEvents (and you may have to wait for a VOEvent to be broadcast
 via the broker!).
+
+## Running a 'voevent-listener' as a system service
+If you want to run Comet and a handler script on a long term basis,
+you have a few options.
+
+For basic testing, you could simply
+manually start your version of
+[listen_for_voevents.sh](examples/listen_for_voevents.sh) and leave it running
+in the background, perhaps using a detachable terminal environment such as
+[GNU Screen](https://www.nixtutor.com/linux/introduction-to-gnu-screen/)
+or [tmux](https://tmux.github.io/).
+
+In the longer run, you will probably want to configure your script to run as a
+system service, so that it gets restarted if your system is rebooted, etc.
+Unfortunately the best way to set this up will depend on your
+flavour of Linux, so you'll need to search for
+'custom init script ubuntu 14.04' or something similar.
+
 
 ## Sending VOEvents
 A full guide is on the To Do list! For now, see [send_alert.py](examples/send_alert.py).
