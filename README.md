@@ -18,66 +18,65 @@ a quick example, and then use *voevent-parse* and *Comet* directly
 (see also: the [voevent-parse tutorial](https://github.com/timstaley/voevent-parse-tutorial), 
 and [pysovo](https://github.com/timstaley/pysovo)).
 
+
 ## Quickstart (Ubuntu)
 
 (For the impatient, who are running **Ubuntu/Debian** and have the virtualenv tool available)
 
     sudo apt-get install libxml2-dev libxslt-dev
-    ./INSTALL.sh && ./RUNME.sh
+    source INSTALL.sh && source RUNME.sh
 
 ## Installation (including Mac OSX etc)
-
 
 You'll need to install some Python packages for these scripts to work.
 Working in a 
 [virtualenv](http://virtualenv.readthedocs.org/en/latest/virtualenv.html)
-is recommended, but not essential.
+is [recommended](https://www.dabapps.com/blog/introduction-to-pip-and-virtualenv-python/), 
+but not essential.
 I also recommend use of
 [pip](http://pip.readthedocs.org/en/latest/quickstart.html)
 since it allows easy version checking and package uninstallation.
 
-Note that one of the python package dependencies is *lxml*, which
-has some prerequisites for compilation that can cause a
+Note that one of the python package dependencies is 
+[lxml](http://lxml.de/), 
+which has some prerequisites for installation that can cause a
 standard ``pip install``
-to fail, sometimes with confusing errors. So it might be a good idea to try
+to fail, sometimes with confusing errors. 
+So, before we do anything else it might be a good idea to try
 
     pip install lxml
     
 and see if that works for you.
 
-On Ubuntu you can satisfy those requirements (so you can ``pip install lxml``) 
-by running:
+On Ubuntu or Debian Linux you can satisfy those requirements by running:
 
     apt-get install libxml2-dev libxslt-dev
 
-before you attempt to install anything else.
-Mac OSX users might try:
-
-    STATIC_DEPS=true pip install lxml
-
-(See the relevant
+before you attempt to install anything else. For more information
+(e.g. for Mac OSX), see the relevant 
 [Notes on VOEvent section](http://voevent.readthedocs.org/en/latest/setup.html#background-and-dependencies) 
 or consult the 
-[LXML docs](http://lxml.de/installation.html#installation) for more detail).
+[lxml docs](http://lxml.de/installation.html#installation).
 
 You can check if LXML is already installed by simply trying 
 
     import lxml
     
-in the python interpreter. 
+from the python interpreter. 
 
 Next, grab a local copy of the `fourpiskytools` repository:
 
     git clone https://github.com/timstaley/fourpiskytools.git
 
-Then, ``cd fourpiskytools`` and 
+Then, ``cd fourpiskytools`` and (if you're working with a virtualenv): 
 
     pip install .
+  
+If you prefer not to use a virtualenv, you can instead [install into your 
+user-area](http://pip-python3.readthedocs.org/en/latest/user_guide.html#user-installs):
+
+    pip install --user .
     
-
-Or if you prefer the traditional method:
-
-    python setup.py install 
 
 If you run into problems, try consulting the installation guides for
 [voevent-parse](http://voevent-parse.readthedocs.org/en/master/intro.html#installation)
@@ -112,12 +111,13 @@ The examples folder contains a couple of basic VOEvent processing scripts
 to get you started. First, take a look at 
 [process_voevent_from_stdin_1.py](examples/process_voevent_from_stdin_1.py).
 This very short script just reads in the data from stdin, parses it as a 
-VOEvent object, and prints out a couple of key items of information. 
+VOEvent object, and writes out a few key items of information to a 
+logfile.
 
-Let's try it out. There's a sample XML packet in the examples folder, 
-[test_packet.xml](examples/test_packet.xml). We can test our processing 
-script on this packet by piping it in, using the command line. From 
-the examples directory:
+Let's try it out. There's a sample VOEvent XML packet in the examples folder,
+[test_packet.xml](examples/test_packet.xml). We can use this to run a quick 
+test of our processing script, by simply piping it in using the command line. 
+From the examples directory:
 
     cat test_packet.xml | ./process_voevent_from_stdin_1.py
     
@@ -129,17 +129,26 @@ You should see something like:
 
 The same text should also be output to a logfile, `script1.log`.
 
-The second script, [process_voevent_from_stdin_2.py](examples/process_voevent_from_stdin_2.py), contains
-some slightly more interesting logic, so you can change processing depending what sort of VOEvent packet is received.
-As an aside, note that if you're on an Ubuntu system, you can ``pip install pgi`` to get pop-up desktop notifications using the code called from script 2.
+The second script,
+[process_voevent_from_stdin_2.py](examples/process_voevent_from_stdin_2.py),
+contains some slightly more interesting logic, showing how to run different
+functions depending what sort of VOEvent packet is received. As an aside, note
+that if you're on an Ubuntu system, you can ``pip install pgi`` to get pop-up
+desktop notifications using the code called from script 2.
 
 ### Hooking up Comet and the processing script
-The examples folder also contains a shell script that runs Comet and passes VOEvents to a handler script - see 
-[listen_for_voevents.sh](examples/listen_for_voevents.sh). 
-Note that you won't see the command line output from the called script - you'll 
-have to inspect the logfile to see the results from processing any 
-incoming VOEvents (and you may have to wait for a VOEvent to be broadcast
-via the broker!).
+The examples folder also contains a shell script that runs Comet and passes
+VOEvents to a handler script - see
+[listen_for_voevents.sh](examples/listen_for_voevents.sh). Note that you won't
+see the command line output from the handler script - you'll have to inspect the
+logfile instead. (You can track updates to the log by opening another terminal
+window and running e.g. ``tail -f script1.log``.)
+
+To see this in action, you can either wait for a VOEvent to be received from
+whichever broker you've connected to, or you can inject your own test-packet -
+try opening another terminal and running the
+[ping_broker.py](examples/ping_broker.py).
+
 
 ## Running a 'voevent-listener' as a system service
 If you want to run Comet and a handler script on a long term basis,
