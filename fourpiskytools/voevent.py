@@ -20,7 +20,7 @@ def generate_stream_id():
     """
     datetime_format_short = '%y%m%d-%H%M.%S'
     timestamp = datetime.utcnow().strftime(datetime_format_short)
-    stream_id = timestamp+'_'+uuid.uuid1().hex[:8]
+    stream_id = timestamp + '_' + uuid.uuid1().hex[:8]
     return stream_id
 
 
@@ -63,11 +63,13 @@ def create_basic_location_alert(id, role, description,
     stream = id[id_keys.stream]
     v = create_skeleton_voevent(id, stream, role)
     v.What.Description = description
-    vp.add_where_when(v,
-          coords=vp.Position2D(ra=ra, dec=dec, err=err,
-                               units='deg',
-                               system=vp.definitions.sky_coord_system.fk5),
-          obs_time=event_time,
-          observatory_location=vp.definitions.observatory_location.geosurface)
+    event_position = vp.Position2D(
+        ra=ra, dec=dec, err=err,
+        units='deg',
+        system=vp.definitions.sky_coord_system.utc_fk5_geo)
+    vp.add_where_when(
+        v,
+        coords=event_position,
+        obs_time=event_time,
+        observatory_location=vp.definitions.observatory_location.geosurface)
     return v
-

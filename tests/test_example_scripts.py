@@ -3,7 +3,17 @@ import pytest
 import os
 import sys
 import subprocess
+import voeventparse as vp
+import fourpiskytools
+from fourpiskytools.identity import id_keys
 
+example_identity = {
+    id_keys.address : 'voevent.organization.tld',
+    id_keys.stream : 'ProjectFooAlerts',
+    id_keys.shortName : 'ProjectFoo',
+    id_keys.contactName : "Jo Bloggs",
+    id_keys.contactEmail : "jb@observatory.org",
+    }
 
 def run_command(command_and_args_list, stdin_bytes=None):
     """
@@ -36,3 +46,15 @@ def test_send_alert():
     script_path = os.path.join(examples_folder, 'send_alert.py')
     retcode = run_command([script_path], None)
     assert  retcode == 0
+
+def test_process_voevent_script_1():
+    script_path = os.path.join(examples_folder, 'process_voevent_from_stdin_1.py')
+    test_packet = fourpiskytools.voevent.create_test_packet(example_identity)
+    retcode = run_command([script_path], vp.dumps(test_packet))
+    assert retcode == 0
+
+def test_process_voevent_script_2():
+    script_path = os.path.join(examples_folder, 'process_voevent_from_stdin_2.py')
+    test_packet = fourpiskytools.voevent.create_test_packet(example_identity)
+    retcode = run_command([script_path], vp.dumps(test_packet))
+    assert retcode == 0
