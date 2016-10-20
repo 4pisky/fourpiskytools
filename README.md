@@ -1,4 +1,4 @@
-# fourpiskytools
+# fourpiskytools [![Build Status](https://travis-ci.org/4pisky/fourpiskytools.svg?branch=master)](https://travis-ci.org/4pisky/fourpiskytools)
 
 ![4 Pi Sky Logo](4ps_logo_small.png)
 
