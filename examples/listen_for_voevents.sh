@@ -11,7 +11,7 @@
 LOCALIVORN=ivo://fpstoolstest/$(hostname)
 
 # This is the script that comet will pass every VOEvent to, for processing:
-HANDLER=./process_voevent_from_stdin_2.py
+HANDLER=process_voevent_from_stdin_2.py
 
 # The remote broker that we will subscribe to. The '--remote' flag can be
 # repeated with different addresses if you want to  listen to multiple remotes.

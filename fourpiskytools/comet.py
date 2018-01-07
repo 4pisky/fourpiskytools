@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+from __future__ import absolute_import, print_function
 import logging
 import subprocess
 import voeventparse
@@ -31,12 +31,12 @@ def send_voevent(voevent, host='localhost', port=8098):
     
 def dummy_send_to_comet_stub(voevent, host='localhost', port=8098):
     tf = tempfile.NamedTemporaryFile(delete=False)
-    print textwrap.dedent("""\
+    print(textwrap.dedent("""\
     *************
      Would have sent a VOEvent to node: {host}:{port};
     Copy of XML dumped to: {fname}
     *************
-    """.format(host=host, port=port, fname=tf.name))
+    """.format(host=host, port=port, fname=tf.name)))
     voeventparse.dump(voevent, tf)
     tf.close()
     # raise subprocess.CalledProcessError(1, 'dummyvosend')

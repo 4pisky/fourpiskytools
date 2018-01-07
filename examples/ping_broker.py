@@ -33,7 +33,7 @@ host = 'localhost'
 test_packet = fourpiskytools.voevent.create_test_packet(example_identity)
 
 # Dump a copy of the test packet to the current directory for manual inspection
-with open('test_packet.xml','w') as f:
+with open('test_packet.xml','wb') as f:
     voeventparse.dump(test_packet, f)
 
 fourpiskytools.comet.send_voevent(test_packet, host=host)

@@ -11,18 +11,24 @@ Can be tested at the command line by running (for example):
 
 """
 
-import sys
-import voeventparse
 import datetime
-
 import logging
+import sys
+
+import six
+import voeventparse
+
 logging.basicConfig(filename='script1.log',level=logging.INFO)
 logger = logging.getLogger("script1")
 logger.handlers.append(logging.StreamHandler(sys.stdout))
 
 
 def main():
-    stdin = sys.stdin.read()
+    if six.PY2:
+        stdin = sys.stdin.read()
+    else:
+        # Py3:
+        stdin = sys.stdin.buffer.read()
     v = voeventparse.loads(stdin)
     handle_voevent(v)
     return 0

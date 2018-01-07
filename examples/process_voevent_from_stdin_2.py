@@ -14,10 +14,12 @@ Can be tested at the command line by running (for example):
 
 """
 
+import logging
 import sys
+
+import six
 import voeventparse
 
-import logging
 logging.basicConfig(filename='script2.log',level=logging.INFO)
 logger = logging.getLogger('notifier')
 logger.handlers.append(logging.StreamHandler(sys.stdout))
@@ -25,7 +27,11 @@ logger.handlers.append(logging.StreamHandler(sys.stdout))
 from fourpiskytools.notify import Notifier
 
 def main():
-    stdin = sys.stdin.read()
+    if six.PY2:
+        stdin = sys.stdin.read()
+    else:
+        # Py3:
+        stdin = sys.stdin.buffer.read()
     v = voeventparse.loads(stdin)
     handle_voevent(v)
     return 0
@@ -33,6 +39,8 @@ def main():
 def handle_voevent(v):
     if is_grb(v):
         handle_grb(v)
+    elif is_swift_pointing(v):        
+        handle_pointing(v)
     elif is_ping_packet(v):
         handle_ping_packet(v)
     else:
@@ -43,6 +51,13 @@ def is_grb(v):
     if ivorn.find("ivo://nasa.gsfc.gcn/SWIFT#BAT_GRB_Pos") == 0:
         return True
     return False
+
+def is_swift_pointing(v):        
+    ivorn = v.attrib['ivorn']
+    if ivorn.startswith("ivo://nasa.gsfc.gcn/SWIFT#Point_Dir_"):
+        return True
+    return False
+
 
 def is_ping_packet(v):
     ivorn = v.attrib['ivorn']
@@ -61,6 +76,15 @@ def handle_grb(v):
     text = "Swift packet received, coords are {}".format(coords)
     n = Notifier()
     n.send_notification(title="NEW SWIFT GRB!",
+                        text=text)
+    handle_other(v)
+
+def handle_pointing(v):
+    ivorn = v.attrib['ivorn']
+    coords = voeventparse.pull_astro_coords(v)
+    text = "Swift repointing, coords are {}".format(coords)
+    n = Notifier()
+    n.send_notification(title="Swift repointing!",
                         text=text)
     handle_other(v)
 

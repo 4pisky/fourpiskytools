@@ -1,9 +1,10 @@
 from __future__ import absolute_import, print_function
-import pytest
+
 import os
-import sys
 import subprocess
+
 import voeventparse as vp
+
 import fourpiskytools
 from fourpiskytools.identity import id_keys
 
