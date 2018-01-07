@@ -7,5 +7,5 @@ import pytest
 if __name__ == "__main__":
     import logging
     logging.basicConfig(level=logging.DEBUG)
-    pytest.main()
+    sys.exit(pytest.main())
 

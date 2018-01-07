@@ -8,6 +8,7 @@ from fourpiskytools.identity import id_keys
 from fourpiskytools.voevent import create_basic_location_alert
 import voeventparse as vp
 from datetime import datetime
+import pytz
 
 example_identity = {
     id_keys.address : 'voevent.organization.tld',
@@ -31,7 +32,8 @@ host = 'localhost'
 # Dummy values:
 ra,dec = 90.0,-45.0
 positional_error = 0.1 #degrees error radius
-event_datetime = datetime(year=2000,month=1,day=1,hour=0,minute=0)
+event_datetime = datetime(year=2000,month=1,day=1,hour=0,minute=0,
+                          tzinfo=pytz.UTC)
 
 alert_packet = create_basic_location_alert(example_identity,
                                        # role = vp.definitions.roles.observation,
@@ -46,7 +48,7 @@ alert_packet = create_basic_location_alert(example_identity,
 # http://voevent-parse.readthedocs.org/en/0.7.0/examples.html#author-a-new-voevent-packet
 
 # Dump a copy of the packet to the current directory for manual inspection
-with open('alert_packet.xml','w') as f:
+with open('alert_packet.xml','wb') as f:
     vp.dump(alert_packet, f)
 
 fourpiskytools.comet.send_voevent(alert_packet, host=host)

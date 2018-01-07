@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 from datetime import datetime
+import pytz
 import uuid
 import voeventparse as vp
 from fourpiskytools.identity import id_keys
@@ -27,7 +28,8 @@ def generate_stream_id():
 def create_skeleton_voevent(id, stream, role):
     v = vp.Voevent(stream=id[id_keys.address] + '/' + stream,
                    stream_id=generate_stream_id(), role=role)
-    vp.set_who(v, date=datetime.utcnow(),
+    now = datetime.utcnow().replace(tzinfo=pytz.UTC)
+    vp.set_who(v, date=now,
                author_ivorn=id[id_keys.address])
     vp.set_author(v,
                   shortName=id[id_keys.shortName],
