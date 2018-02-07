@@ -15,7 +15,12 @@ HANDLER=./process_voevent_from_stdin_2.py
 
 # The remote broker that we will subscribe to. The '--remote' flag can be
 # repeated with different addresses if you want to  listen to multiple remotes.
-REMOTE=localhost
+
+# Use this with another locally running instance for testing:
+#REMOTE=localhost 
+
+# Subscribe to the 4-Pi-Sky broker:
+REMOTE=voevent.4pisky.org
 
 # Comet maintains a local 'dbm' database directory, where it keeps track of what it's seen before.
 # By default this is /tmp - which is usually fine, but if you're running multiple instances on one 
